@@ -1,0 +1,27 @@
+# Builds
+*.apk
+*.unitypackage
+
+# System
+.DS_Store*
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+[Tt]humbs.db
+[Dd]esktop.ini
+
+# Unity Artifacts
+/Assets/AssetStoreTools*
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ibrary/
+/[Oo]bj/
+/[Tt]emp/
+*.pidb.meta
+sysinfo.txt
+
+# VS Code
+/.vscode/
+
