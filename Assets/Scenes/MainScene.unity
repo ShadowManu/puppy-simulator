@@ -355,7 +355,7 @@ MonoBehaviour:
   maxSpeed: 10
   minDistance: 2
   maxDistance: 20
-  timeToTarget: 2
+  timeToTarget: 1
 --- !u!1 &806389628
 GameObject:
   m_ObjectHideFlags: 0
