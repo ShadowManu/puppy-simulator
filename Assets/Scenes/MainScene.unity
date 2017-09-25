@@ -351,10 +351,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  STEERING_MODE: 0
-  maxSpeed: 5
+  mode: 0
+  maxSpeed: 10
   minDistance: 2
   maxDistance: 20
+  timeToTarget: 2
 --- !u!1 &806389628
 GameObject:
   m_ObjectHideFlags: 0

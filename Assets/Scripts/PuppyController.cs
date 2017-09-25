@@ -10,6 +10,7 @@ public class PuppyController : MonoBehaviour {
   public float maxSpeed;
   public float minDistance;
   public float maxDistance;
+  public float timeToTarget;
 
   public GameObject target { get { return player; } }
   public float targetDistance { get { return (target.transform.position - transform.position).magnitude; } }
@@ -21,17 +22,24 @@ public class PuppyController : MonoBehaviour {
 
   /* Update is called once per frame */
   void Update() {
-    Steering steering = Steering.GetSteering(gameObject, target, maxSpeed);
+    Steering steering = Steering.GetSteering(gameObject, target, mode, maxSpeed, timeToTarget);
 
     // Change mode
     if (Input.GetKeyDown("m")) mode = mode.NextMode();
 
     // Update position
     if (CanMove()) {
-      if (mode == Mode.Seek || mode == Mode.SeekNoOvershoot)
-        transform.position += steering.velocity * Time.deltaTime;
-      if (mode == Mode.Flee)
-        transform.position -= steering.velocity * Time.deltaTime;
+      switch (mode) {
+        case Mode.Seek:
+        case Mode.SeekNoOvershoot:
+        case Mode.Arriving:
+          transform.position += steering.velocity * Time.deltaTime;
+          break;
+        
+        case Mode.Flee:
+          transform.position -= steering.velocity * Time.deltaTime;
+          break;
+      }
     }
   }
 
@@ -41,6 +49,7 @@ public class PuppyController : MonoBehaviour {
       (mode == Mode.None) ||
       (mode == Mode.Seek) ||
       (mode == Mode.SeekNoOvershoot && targetDistance >= minDistance) ||
-      (mode == Mode.Flee && targetDistance <= maxDistance);
+      (mode == Mode.Flee && targetDistance <= maxDistance) ||
+      (mode == Mode.Arriving);
   }
 }

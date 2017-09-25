@@ -6,7 +6,8 @@ public enum Mode {
   None,
   Seek,
   SeekNoOvershoot,
-  Flee
+  Flee,
+  Arriving,
 }
 
 static class ModeMethods {
@@ -17,7 +18,8 @@ static class ModeMethods {
       case Mode.None:            return Mode.Seek;
       case Mode.Seek:            return Mode.SeekNoOvershoot;
       case Mode.SeekNoOvershoot: return Mode.Flee;
-      case Mode.Flee:            return Mode.None;
+      case Mode.Flee:            return Mode.Arriving;
+      case Mode.Arriving:        return Mode.None;
     }
   }
 }
