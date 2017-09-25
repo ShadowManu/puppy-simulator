@@ -13,6 +13,7 @@ ehthumbs.db
 [Dd]esktop.ini
 
 # Unity Artifacts
+*.csproj
 /Assets/AssetStoreTools*
 /[Bb]uild/
 /[Bb]uilds/
