@@ -5,7 +5,7 @@ using UnityEngine;
 public class PuppyController : MonoBehaviour {
   public GameObject player;
 
-	public Mode mode = Mode.None;
+  public Mode mode = Mode.None;
 
   public float maxSpeed;
   public float minDistance;
@@ -24,20 +24,23 @@ public class PuppyController : MonoBehaviour {
     Steering steering = Steering.GetSteering(gameObject, target, maxSpeed);
 
     // Change mode
-		if (Input.GetKeyDown("m")) mode = mode.NextMode();
+    if (Input.GetKeyDown("m")) mode = mode.NextMode();
 
     // Update position
     if (CanMove()) {
-			if (mode == Mode.Seek) transform.position += steering.velocity * Time.deltaTime;
-			if (mode == Mode.Flee) transform.position -= steering.velocity * Time.deltaTime;
+      if (mode == Mode.Seek || mode == Mode.SeekNoOvershoot)
+        transform.position += steering.velocity * Time.deltaTime;
+      if (mode == Mode.Flee)
+        transform.position -= steering.velocity * Time.deltaTime;
     }
   }
 
   /** Defines guard conditions to allow the position to be modified */
   bool CanMove() {
-		return
+    return
       (mode == Mode.None) ||
-			(mode == Mode.Seek && targetDistance >= minDistance) ||
-			(mode == Mode.Flee && targetDistance <= maxDistance);
+      (mode == Mode.Seek) ||
+      (mode == Mode.SeekNoOvershoot && targetDistance >= minDistance) ||
+      (mode == Mode.Flee && targetDistance <= maxDistance);
   }
 }

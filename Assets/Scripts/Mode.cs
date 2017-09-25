@@ -3,9 +3,10 @@
   * In the future, it will be controlled globally automatically depending the state of the demo.
   */
 public enum Mode {
-	None,
-	Seek,
-	Flee
+  None,
+  Seek,
+  SeekNoOvershoot,
+  Flee
 }
 
 static class ModeMethods {
@@ -13,9 +14,10 @@ static class ModeMethods {
   public static Mode NextMode(this Mode mode) {
     switch (mode) {
       default:
-      case Mode.None: return Mode.Seek;
-      case Mode.Seek: return Mode.Flee;
-      case Mode.Flee: return Mode.None;
+      case Mode.None:            return Mode.Seek;
+      case Mode.Seek:            return Mode.SeekNoOvershoot;
+      case Mode.SeekNoOvershoot: return Mode.Flee;
+      case Mode.Flee:            return Mode.None;
     }
   }
 }
