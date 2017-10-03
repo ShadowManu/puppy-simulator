@@ -8,7 +8,7 @@ public struct Throwing {
     throwing = th;
   }
   
-  public static Throwing CalculateThrowing(Vector3 start, Vector3 end, float muzzleVel, Vector3 gravity) {
+  public static Vector3 CalculateThrowing(Vector3 start, Vector3 end, float muzzleVel, Vector3 gravity) {
     Vector3 delta;
     float a,b,c;    
     float time0,time1,time;
@@ -21,7 +21,7 @@ public struct Throwing {
     b = -4 * (Vector3.Dot(gravity,delta) + (muzzleVel*muzzleVel));
     c = 4 * Vector3.Dot(delta,delta);
 
-    if (4*a*c > b*b) { return new Throwing(Vector3.zero); }
+    if (4*a*c > b*b) { return Vector3.zero; }
 
     aux = b*b - 4*a*c;
     time0 = Mathf.Sqrt((-b + Mathf.Sqrt(aux)) / (2*a));
@@ -29,7 +29,7 @@ public struct Throwing {
 
     if (time0 < 0) {
       if (time1 < 0) { 
-        return new Throwing(Vector3.zero); 
+        return Vector3.zero;
       }
       else {
         time = time1;
@@ -45,6 +45,6 @@ public struct Throwing {
     }
 
     result = (2*delta - gravity * (time*time)) / (2*muzzleVel*time);
-    return new Throwing(result);
+    return result;
   }
 }

@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public struct Steering {
+public class Steering {
   public Vector3 velocity;
   public float rotation;
 
