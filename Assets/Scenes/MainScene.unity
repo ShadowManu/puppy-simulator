@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.43667564, g: 0.48427147, b: 0.56452364, a: 1}
+  m_IndirectSpecularColor: {r: 0.43667546, g: 0.48427135, b: 0.5645225, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -364,10 +364,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   mode: 0
-  maxSpeed: 10
-  minDistance: 2
-  maxDistance: 20
-  timeToTarget: 1
+  maxVel: 20
+  maxLin: 100
+  velocity: {x: 0, y: 0, z: 0}
+  linear: {x: 0, y: 0, z: 0}
+  targetRadius: 0.1
+  slowRadius: 10
+  timeToTarget: 0.1
+  targetSpeed: 0
 --- !u!1 &806389628
 GameObject:
   m_ObjectHideFlags: 0

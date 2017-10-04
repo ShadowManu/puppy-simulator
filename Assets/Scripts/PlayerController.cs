@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour, Element {
+
   public float speed;
   private Rigidbody rb;
 
@@ -10,7 +11,7 @@ public class PlayerController : MonoBehaviour {
   void Start () {
     rb = GetComponent<Rigidbody>();
   }
-  
+
   // Update is called once per frame
   void FixedUpdate () {
     float moveHorizontal = Input.GetAxis("Horizontal");

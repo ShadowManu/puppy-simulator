@@ -2,30 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PuppyController : MonoBehaviour {
-  public GameObject player;
-  public Mode mode = Mode.None;
+public class PuppyController : MonoBehaviour, SteeringElement {
+  public Steering steering { get; set; }
 
-  public GameObject target { get { return player; } }
-  public float targetDistance { get { return (target.transform.position - transform.position).magnitude; } }
+  public Element player;
+  public Element target { get { return player; } }
+
+  public ArriveOptions arriveOpts = new ArriveOptions();
 
   /* Initialization */
-  void Start() {
-    player = GameObject.Find("Player");
-  }
+  void Start() { Init(); }
 
   /* Update is called once per frame */
   void Update() {
-    Steering steering = Steering.GetSteering(gameObject, target, new SteeringOptions(mode));
-
-    updatePosition(steering);
-
+    Init();
     // Change mode
-    if (Input.GetKeyDown("m")) mode = mode.NextMode();
+    // if (Input.GetKeyDown("m")) mode = mode.NextMode();
+
+    steering = Dynamic.Arrive(this, target, arriveOpts);
+    updatePosition(steering);
   }
 
   /** Update the object position given a steerig  */
   void updatePosition(Steering steering) {
     transform.position += steering.velocity * Time.deltaTime;
+  }
+
+  private void Init() {
+    if (player == null) player = GameObject.Find("Player").GetComponent<PlayerController>();
+    if (steering == null) steering = new Steering();
   }
 }
