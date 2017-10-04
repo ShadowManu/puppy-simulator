@@ -7,6 +7,15 @@ public class PlayerController : MonoBehaviour, Element {
   public float speed;
   private Rigidbody rb;
 
+  public float orientation {
+    get {
+      return transform.rotation.y * ((float) System.Math.PI) / 360f;
+    }
+    set {
+      
+    }
+  }
+
   // Use this for initialization
   void Start () {
     rb = GetComponent<Rigidbody>();
