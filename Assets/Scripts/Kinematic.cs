@@ -32,20 +32,21 @@ public class Kinematic {
   }
 
   /** Transforms a vector in a kinematic orientation, using x and z values  */
-  public static float VectorToOrientation(Vector3 vector) {
+  public static float Vec2Orient(Vector3 vector) {
     Vector3 flat = Vector3.ProjectOnPlane(vector, Vector3.up);
     return Vector3.SignedAngle(Vector3.left, flat, Vector3.up);
   }
 
   /** Transforms an orientation in a vector, useful to calculate differences */
-  public static Vector3 OrientationToVector(float orientation) {
+  public static Vector3 Orient2Vec(float orientation) {
     return Quaternion.Euler(0, orientation, 0) * Vector3.left;
   }
 
-  /** Allows to calculate an orientation difference using always the minimal angle direction */
-  public static float OrientationDifference(float source, float target) {
-    Vector3 sourceVec = Kinematic.OrientationToVector(source);
-    Vector3 targetVec = Kinematic.OrientationToVector(target);
+  /** Orientation difference. Canonical implementation, as it outputs the minimal angle direction
+   *  and does not have to deal with Y coordinates in vector representations that may have miscalculations if not removed properly */
+  public static float OrientDiff(float source, float target) {
+    Vector3 sourceVec = Kinematic.Orient2Vec(source);
+    Vector3 targetVec = Kinematic.Orient2Vec(target);
     return Vector3.SignedAngle(sourceVec, targetVec, Vector3.up);
   }
 }

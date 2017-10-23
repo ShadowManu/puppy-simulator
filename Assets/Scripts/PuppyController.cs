@@ -23,7 +23,7 @@ public class PuppyController : MonoBehaviour {
 
   void Update() {
     Steering arrive = Dynamic.Arrive(kinematic, steering, target, arriveOpts);
-    Steering align = Dynamic.Align(kinematic, steering, target, alignOptions);
+    Steering align = Dynamic.Face(kinematic, steering, target, alignOptions);
     steering = arrive.Combine(align);
 
     kinematic.UpdateKinematic(steering);
