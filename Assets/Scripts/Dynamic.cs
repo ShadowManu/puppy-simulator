@@ -1,30 +1,26 @@
+using System;
 using UnityEngine;
 
 public class Dynamic {
-  public static Steering Align(SteeringElement source, float target, AlignOptions opts) {
+  public static Steering Align(Kinematic source, Steering sourceSteering, Kinematic target, AlignOptions opts) {
     Steering steering = new Steering();
-    float targetRotation;
-
-    float rotation = Utils.MapToRange(target - source.transform.rotation.w);
+    float rotation = Kinematic.OrientationDifference(source.orientation, Kinematic.VectorToOrientation(target.position - source.position));
     float rotationSize = System.Math.Abs(rotation);
+    float targetRotation;
 
     if (rotationSize < opts.targetRadius) return steering;
     if (rotationSize > opts.slowRadius) targetRotation = opts.maxRotation;
     else targetRotation = rotationSize * opts.maxRotation / opts.slowRadius;
 
-    steering.angular = (targetRotation - source.steering.rotation) / opts.timeToTarget;
-
-    float angularSize = System.Math.Abs(steering.angular);
-    if (steering.angular > opts.maxAngular) steering.angular = steering.angular * opts.maxAngular / angularSize;
-
-    steering.rotation = source.steering.rotation + steering.angular * Time.fixedDeltaTime;
+    steering.angular = Math.Min((targetRotation * Mathf.Sign(rotation) - sourceSteering.rotation) / opts.timeToTarget, opts.maxAngular);
+    steering.rotation = sourceSteering.rotation + steering.angular * Time.deltaTime;
 
     return steering;
   }
 
-  public static Steering Arrive(SteeringElement source, Element target, ArriveOptions opts) {
+  public static Steering Arrive(Kinematic source, Steering sourceSteering, Kinematic target, ArriveOptions opts) {
     Steering steering = new Steering();
-    Vector3 distance = target.transform.position - source.transform.position; distance.y = 0; // Dismiss Y Axis
+    Vector3 distance = Vector3.ProjectOnPlane(target.position - source.position, Vector3.up);
     float targetSpeed;
 
     // This hack allows to stop before the target
@@ -36,20 +32,20 @@ public class Dynamic {
 
     Vector3 targetVelocity = Vector3.Normalize(distance) * targetSpeed;
 
-    steering.linear = (targetVelocity - source.steering.velocity) / opts.timeToTarget;
+    steering.linear = (targetVelocity - sourceSteering.velocity) / opts.timeToTarget;
     if (steering.linear.magnitude > opts.maxLinear) steering.linear = Vector3.Normalize(distance) * opts.maxLinear;
 
-    steering.velocity = Vector3.ClampMagnitude(source.steering.velocity + steering.linear * Time.fixedDeltaTime, opts.maxVelocity);
+    steering.velocity = Vector3.ClampMagnitude(sourceSteering.velocity + steering.linear * Time.fixedDeltaTime, opts.maxVelocity);
 
     return steering;
   }
 }
 
 public class AlignOptions {
-  public float maxRotation = 3;
-  public float maxAngular = 3;
+  public float maxRotation = 200;
+  public float maxAngular = 200;
 
-  public float slowRadius = 1;
+  public float slowRadius = 75;
   public float targetRadius = 0.1f;
   public float timeToTarget = 0.1f;
 
