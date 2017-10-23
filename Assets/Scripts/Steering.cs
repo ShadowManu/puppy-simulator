@@ -24,4 +24,17 @@ public class Steering {
     this.rotation = rotation;
     this.angular = angular;
   }
+
+  /** Linearly sums steering properties */
+  public Steering Combine(Steering other) {
+    Steering steering = new Steering();
+
+    steering.velocity = this.velocity + other.velocity;
+    steering.linear = this.linear + other.linear;
+
+    steering.rotation = this.rotation + other.rotation;
+    steering.angular = this.angular + other.angular;
+
+    return steering;
+  }
 }
