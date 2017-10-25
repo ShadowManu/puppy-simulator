@@ -20,18 +20,20 @@ public class Triangle {
     this.column = column;
     this.side = side;
 
-    // Build up Characteristic Point
-    bool pointsUp = (row + column) % 2 == 0; 
-    float x = (float) (column * side + (side / 2)); 
-    float z = (float) ((row * height) + (pointsUp ? inRadius : inRadius * 2));
-    point = new Vector3(x, 0, z);
-
+    this.calcCharacteristicPoint();
     this.attachGameObject();
   }
 
   public double height { get { return side * Math.Sqrt(3) / 2; } }
 
   public double inRadius { get { return height / 3; } }
+
+  private void calcCharacteristicPoint() {
+    bool pointsUp = (row + column) % 2 == 0;
+    float x = (float) (column * side + (side / 2));
+    float z = (float) ((row * height) + (pointsUp ? inRadius : inRadius * 2));
+    point = new Vector3(x, 0, z);
+  }
 
   private void attachGameObject() {
     GameObject block = GameObject.Find("Grass");
