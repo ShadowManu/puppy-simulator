@@ -1,10 +1,11 @@
 using System;
+using System.Linq;
 using UnityEngine;
 
 public class Triangle {
   public Vector3 point;
 
-  protected static double DEFAULT_SIDE = 1;
+  protected static double DEFAULT_SIDE = 3;
 
   private int row;
   private int column;
@@ -28,49 +29,76 @@ public class Triangle {
 
   public double inRadius { get { return height / 3; } }
 
+  public bool pointsUp { get { return (row + column) % 2 != 0; } }
+
   private void calcCharacteristicPoint() {
-    bool pointsUp = (row + column) % 2 == 0;
-    float x = (float) (column * side + (side / 2));
+    float x = (float) ((column + 1) * side / 2);
     float z = (float) ((row * height) + (pointsUp ? inRadius : inRadius * 2));
     point = new Vector3(x, 0, z);
   }
 
   private void attachGameObject() {
     GameObject block = GameObject.Find("Grass");
-    gameObject = UnityEngine.Object.Instantiate(block, new Vector3(5, 1, 5), Quaternion.identity);
+    gameObject = UnityEngine.Object.Instantiate(block, point, Quaternion.identity);
 
     Mesh mesh = new Mesh();
     gameObject.GetComponent<MeshFilter>().mesh = mesh;
 
-    // TODO This does not flips it yet
+    float RADIUS = (float) height / 3;
+    float HALF = (float) side / 2;
+
+    Vector3[] ov;
+
+    if (pointsUp) {
+      ov = new Vector3[] {
+        // TOP
+        new Vector3(-HALF, 1, -RADIUS),
+        new Vector3(0, 1, 2 * RADIUS),
+        new Vector3(+HALF, 1, -RADIUS),
+
+        // BOTTOM
+        new Vector3(-HALF, 0, -RADIUS),
+        new Vector3(0, 0, 2 * RADIUS),
+        new Vector3(+HALF, 0, -RADIUS),
+      };
+
+    } else {
+      ov = new Vector3[] {
+        // TOP
+        new Vector3(+HALF, 1, +RADIUS),
+        new Vector3(0, 1, -2 * RADIUS),
+        new Vector3(-HALF, 1, +RADIUS),
+        // BOTTOM
+        new Vector3(+HALF, 0, +RADIUS),
+        new Vector3(0, 0, -2 * RADIUS),
+        new Vector3(-HALF, 0, +RADIUS),
+      };
+    }
 
     mesh.vertices = new Vector3[] {
-      // TOP
-      new Vector3(0, 1, 0),
-      new Vector3((float) side / 2, 1, (float) height),
-      new Vector3((float) side, 1, 0),
-      // BOTTOM
-
-      new Vector3(0, 0, 0),
-      new Vector3((float) side / 2, 0, (float) height),
-      new Vector3((float) side, 0, 0),
+      // Top
+      ov[0], ov[1], ov[2],
+      // Lefts
+      ov[0], ov[3], ov[4],
+      ov[0], ov[4], ov[1],
+      // Rights
+      ov[1], ov[4], ov[5],
+      ov[1], ov[5], ov[2],
+      // Front
+      ov[0], ov[2], ov[5],
+      ov[0], ov[5], ov[3],
+      // Bottom
+      ov[3], ov[5], ov[4],
     };
 
-    mesh.triangles = new int[] {
-      // TOP
-      0, 1, 2,
-      // BOTTOM
-      3, 5, 4,
-      // BASE
-      0, 2, 3,
-      3, 2, 5,
-      // LEFT
-      0, 3, 1,
-      1, 3, 4,
-      // RIGHT
-      1, 4, 2,
-      2, 4, 5
-    };
+    mesh.triangles = Enumerable.Range(0, mesh.vertices.Length).ToArray();
+
+    // UV for texturing
+    Vector2[] uvs = new Vector2[mesh.vertices.Length];
+    for (int i = 0; i < uvs.Length; i++) {
+      uvs[i] = new Vector2(mesh.vertices[i].x, mesh.vertices[i].z);
+    }
+    mesh.uv = uvs;
 
     mesh.RecalculateNormals();
   }
