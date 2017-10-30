@@ -14,7 +14,7 @@ public class OldTriangle {
 
   private GameObject gameObject;
 
-  public OldTriangle(int row, int column): this(row, column, Triangle.DEFAULT_SIDE) { }
+  public OldTriangle(int row, int column): this(row, column, OldTriangle.DEFAULT_SIDE) { }
 
   public OldTriangle(int row, int column, double side) {
     this.row = row;
