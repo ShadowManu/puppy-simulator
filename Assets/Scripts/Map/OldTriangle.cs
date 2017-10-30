@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-public class Triangle {
+public class OldTriangle {
   public Vector3 point;
 
   protected static double DEFAULT_SIDE = 3;
@@ -14,9 +14,9 @@ public class Triangle {
 
   private GameObject gameObject;
 
-  public Triangle(int row, int column): this(row, column, Triangle.DEFAULT_SIDE) { }
+  public OldTriangle(int row, int column): this(row, column, Triangle.DEFAULT_SIDE) { }
 
-  public Triangle(int row, int column, double side) {
+  public OldTriangle(int row, int column, double side) {
     this.row = row;
     this.column = column;
     this.side = side;
