@@ -10,12 +10,12 @@ public class Map {
   }
 
   public static Map GenerateMap() {
-    GameObject parent = GameObject.Find("Vertices");
-
     var polygons = new Dictionary<string, Polygon>();
     
-    // Query all vertices and fill polygons with its information
-    foreach (Transform childTransform in parent.transform) {
+    // Query all vertices and create polygons
+    GameObject vertices = GameObject.Find("Vertices");
+
+    foreach (Transform childTransform in vertices.transform) {
       GameObject child = childTransform.gameObject;
       String[] tags = child.GetComponent<VertexController>().tags;
 
@@ -25,6 +25,19 @@ public class Map {
       }
     }
 
+    // Query all centers and assign to polygons
+    GameObject centers = GameObject.Find("Centers");
+
+    foreach (Transform childTransform in centers.transform) {
+      GameObject child = childTransform.gameObject;
+      String polyTag = child.GetComponent<CenterController>().polyTag;
+
+      if (!polygons.ContainsKey(polyTag)) throw new ArgumentException("Polygon Tag \"" + polyTag + "\" could not be found before assigning center");
+
+      polygons[polyTag].SetCenter(childTransform.position);
+    }
+
     return new Map(polygons);
+
   }
 }
