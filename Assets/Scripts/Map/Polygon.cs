@@ -4,14 +4,14 @@ using UnityEngine;
 
 /** Represents a triangle in space with useful related methods */
 public class Polygon {
-  public List<Vector3> vertices = new List<Vector3>();
-  public Vector3 center;
+  public List<GameObject> vertices = new List<GameObject>();
+  public GameObject center;
 
-  public void AddVertex(Vector3 vertex) {
+  public void AddVertex(GameObject vertex) {
     this.vertices.Add(vertex);
   }
 
-  public void SetCenter(Vector3 center) {
+  public void SetCenter(GameObject center) {
     this.center = center;
   }
 
@@ -20,7 +20,11 @@ public class Polygon {
    * Based on http://wiki.unity3d.com/index.php?title=PolyContainsPoint
    */
   public bool ContainsPoint(Vector3 p) {
-    List<Vector3> v = vertices;
+    List<Vector3> v = new List<Vector3>();
+
+    foreach (GameObject go in vertices) {
+      v.Add(go.transform.position);
+    }
 
     int j = v.Capacity - 1; // Last index
     bool inside = false; 

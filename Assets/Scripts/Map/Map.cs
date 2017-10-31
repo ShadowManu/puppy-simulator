@@ -15,26 +15,26 @@ public class Map {
     // Query all vertices and create polygons
     GameObject vertices = GameObject.Find("Vertices");
 
-    foreach (Transform childTransform in vertices.transform) {
-      GameObject child = childTransform.gameObject;
-      String[] tags = child.GetComponent<VertexController>().tags;
+    foreach (Transform transform in vertices.transform) {
+      GameObject vertex = transform.gameObject;
+      String[] tags = vertex.GetComponent<VertexController>().tags;
 
       foreach (string tag in tags) {
         if (!polygons.ContainsKey(tag)) polygons.Add(tag, new Polygon());
-        polygons[tag].AddVertex(childTransform.position);
+        polygons[tag].AddVertex(vertex);
       }
     }
 
     // Query all centers and assign to polygons
     GameObject centers = GameObject.Find("Centers");
 
-    foreach (Transform childTransform in centers.transform) {
-      GameObject child = childTransform.gameObject;
-      String polyTag = child.GetComponent<CenterController>().polyTag;
+    foreach (Transform transform in centers.transform) {
+      GameObject center = transform.gameObject;
+      String polyTag = center.GetComponent<CenterController>().polyTag;
 
       if (!polygons.ContainsKey(polyTag)) throw new ArgumentException("Polygon Tag \"" + polyTag + "\" could not be found before assigning center");
 
-      polygons[polyTag].SetCenter(childTransform.position);
+      polygons[polyTag].SetCenter(center);
     }
 
     return new Map(polygons);
