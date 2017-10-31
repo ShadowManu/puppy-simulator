@@ -11,6 +11,10 @@ public class Polygon {
     this.vertices.Add(vertex);
   }
 
+  public void SetCenter(Vector3 center) {
+    this.center = center;
+  }
+
   /**
    * Defines if points is inside triangle
    * Based on http://wiki.unity3d.com/index.php?title=PolyContainsPoint
