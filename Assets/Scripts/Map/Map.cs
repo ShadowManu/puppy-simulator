@@ -32,7 +32,7 @@ public class Map {
       GameObject center = transform.gameObject;
       CenterController cc = center.GetComponent<CenterController>();
 
-      if (!polygons.ContainsKey(cc.polyTag)) throw new ArgumentException("Polygon Tag \"" + polyTag + "\" could not be found before assigning center");
+      if (!polygons.ContainsKey(cc.polyTag)) throw new ArgumentException("Polygon Tag \"" + cc.polyTag + "\" could not be found before assigning center");
 
       Polygon polygon = polygons[cc.polyTag];
 
