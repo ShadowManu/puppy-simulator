@@ -21,9 +21,10 @@ public class Graph {
     SortedSet<Node> open = new SortedSet<Node>();
     HashSet<Node> closed = new HashSet<Node>();
 
-    // Initialize open list and source path
-    open.Add(source);
+    // Initialize source properties and open list
     source.path.Add(source);
+    source.cost = 0;
+    open.Add(source);
 
     // While nodes to process
     while (open.Count > 0) {
@@ -32,7 +33,9 @@ public class Graph {
       open.Remove(current);
 
       // End step: the current node is the destination
-      if (current == destination) return destination.path;
+      if (current == destination) {
+        return destination.path;
+      }
 
       // Process each neighbor
       foreach (string tag in current.neighborTags) {
