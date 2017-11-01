@@ -30,6 +30,12 @@ public class Map {
     return new Map(polygons);
   }
 
+  public void ToggleCenters() { foreach (var p in polygons.Values) p.ToggleCenter(); }
+
+  public void ToggleLines() { foreach (var p in polygons.Values) p.ToggleLines(); }
+
+  public void ToggleVertices() { foreach (var p in polygons.Values) p.ToggleVertices(); }
+
   private static void checkPolygonValidity(Dictionary<string, Polygon> polygons) {
     foreach (Polygon polygon in polygons.Values) {
       // Verify its a triangle

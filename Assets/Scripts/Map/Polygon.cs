@@ -10,11 +10,38 @@ public class Polygon {
   public GameObject[] vertices;
   public string[] neighborNames;
 
+  private GameObject[] lines;
+
+  private bool enabledVertices = true; // Vertices are shared
+
   public Polygon(string name, GameObject center, GameObject[] vertices, string[] neighborNames) {
     this.name = name;
     this.center = center;
     this.vertices = vertices;
     this.neighborNames = neighborNames;
+
+    GenerateLines();
+  }
+
+  public void ToggleCenter() {
+    Renderer renderer = center.GetComponent<Renderer>();
+    renderer.enabled = !renderer.enabled;
+  }
+
+  public void ToggleLines() {
+    foreach (var line in lines) {
+      Renderer renderer = line.GetComponent<Renderer>();
+      renderer.enabled = !renderer.enabled;
+    }
+  }
+
+  public void ToggleVertices() {
+    enabledVertices = !enabledVertices;
+
+    foreach (var vertex in vertices) {
+      Renderer renderer = vertex.GetComponent<Renderer>();
+      renderer.enabled = enabledVertices;
+    }
   }
 
   /**
@@ -33,5 +60,25 @@ public class Polygon {
          inside = !inside; 
     } 
     return inside; 
+  }
+
+  private void GenerateLines() {
+    Transform parent = GameObject.Find("Lines").transform;
+
+    lines = new GameObject[vertices.Length];
+
+    for (int current = 0, previous = vertices.Length - 1; current < vertices.Length; previous = current++) {
+      GameObject line = (GameObject) UnityEngine.Object.Instantiate(Resources.Load("Line"));
+      LineRenderer renderer = line.GetComponent<LineRenderer>();
+
+      line.transform.parent = parent;
+
+      renderer.SetPositions(new Vector3[] {
+        vertices[current].transform.position,
+        vertices[previous].transform.position
+      });
+
+      lines[current] = line;
+    }
   }
 }
