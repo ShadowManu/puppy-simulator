@@ -6,6 +6,7 @@ using UnityEngine;
 public class Polygon {
   public List<GameObject> vertices = new List<GameObject>();
   public GameObject center;
+  public string[] neighborTags;
 
   public void AddVertex(GameObject vertex) {
     this.vertices.Add(vertex);
@@ -13,6 +14,10 @@ public class Polygon {
 
   public void SetCenter(GameObject center) {
     this.center = center;
+  }
+
+  public void SetNeighborTags(string[] neighborTags) {
+    this.neighborTags = neighborTags;
   }
 
   /**

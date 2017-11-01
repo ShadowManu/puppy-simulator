@@ -25,16 +25,22 @@ public class Map {
       }
     }
 
-    // Query all centers and assign to polygons
+    // Query all centers and assign centers and neighbors to polygons
     GameObject centers = GameObject.Find("Centers");
 
     foreach (Transform transform in centers.transform) {
       GameObject center = transform.gameObject;
-      String polyTag = center.GetComponent<CenterController>().polyTag;
+      CenterController cc = center.GetComponent<CenterController>();
 
-      if (!polygons.ContainsKey(polyTag)) throw new ArgumentException("Polygon Tag \"" + polyTag + "\" could not be found before assigning center");
+      if (!polygons.ContainsKey(cc.polyTag)) throw new ArgumentException("Polygon Tag \"" + polyTag + "\" could not be found before assigning center");
 
-      polygons[polyTag].SetCenter(center);
+      Polygon polygon = polygons[cc.polyTag];
+
+      // Assign center
+      polygon.SetCenter(center);
+
+      // Assign neighbors
+      polygon.SetNeighborTags(cc.neighborTags);
     }
 
     Map.checkPolygonValidity(polygons);
