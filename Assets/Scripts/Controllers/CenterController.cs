@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CenterController : MonoBehaviour {
-  public string polyTag;
-  public string[] neighborTags;
+  public GameObject[] vertices;
+  public string[] neighborNames;
 
   void Start() {
 

@@ -38,8 +38,8 @@ public class Graph {
       }
 
       // Process each neighbor
-      foreach (string tag in current.neighborTags) {
-        Node neighbor = nodes[tag];
+      foreach (string name in current.neighborNames) {
+        Node neighbor = nodes[name];
         float cost = current.cost + (current.position - neighbor.position).magnitude;
 
         // Update cost and path if shortest

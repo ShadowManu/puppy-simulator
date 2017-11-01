@@ -7,7 +7,7 @@ public class Node : IComparable {
   public Polygon polygon;
 
   public Vector3 position { get { return polygon.center.transform.position; } }
-  public string[] neighborTags { get { return polygon.neighborTags; } }
+  public string[] neighborNames { get { return polygon.neighborNames; } }
 
   public float cost = float.MaxValue;
   public List<Node> path = new List<Node>();
