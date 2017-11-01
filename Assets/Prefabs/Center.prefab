@@ -93,7 +93,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2c2591a83e30e44f84ad95bbde26c6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  polyTag: a
+  vertices:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  neighborNames: []
 --- !u!135 &135665713559694738
 SphereCollider:
   m_ObjectHideFlags: 1
