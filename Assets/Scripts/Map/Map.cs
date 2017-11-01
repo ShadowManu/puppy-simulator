@@ -37,7 +37,22 @@ public class Map {
       polygons[polyTag].SetCenter(center);
     }
 
-    return new Map(polygons);
+    Map.checkPolygonValidity(polygons);
 
+    return new Map(polygons);
+  }
+
+  private static void checkPolygonValidity(Dictionary<string, Polygon> polygons) {
+    foreach (Polygon polygon in polygons.Values) {
+      // Verify its a triangle
+      if (polygon.vertices.Count != 3) {
+        throw new Exception("polygon does not have 3 vertices");
+      }
+
+      // Verify it has a center
+      if (polygon.center == null) {
+        throw new Exception("polygon does not have a center");
+      }
+    }
   }
 }
