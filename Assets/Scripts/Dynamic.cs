@@ -37,7 +37,7 @@ public class Dynamic {
     float targetSpeed;
 
     // This hack allows to stop before the target
-    distance = distance - Vector3.ClampMagnitude(Vector3.Normalize(distance) * 3, distance.magnitude);
+    // distance = distance - Vector3.ClampMagnitude(Vector3.Normalize(distance) * 3, distance.magnitude);
 
     // Define target velocity
     if (distance.magnitude < opts.targetRadius) return steering;
