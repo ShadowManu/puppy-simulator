@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "puppy-simulator", "Assembly-CSharp.csproj", "{C0DB4FBF-4D9D-BE63-08D2-2F74EE92878C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "puppy-simulator", "Assembly-CSharp-Editor.csproj", "{CDFCB7DA-3A6A-0F2F-7CBB-8196F0AE487E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{C0DB4FBF-4D9D-BE63-08D2-2F74EE92878C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0DB4FBF-4D9D-BE63-08D2-2F74EE92878C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0DB4FBF-4D9D-BE63-08D2-2F74EE92878C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDFCB7DA-3A6A-0F2F-7CBB-8196F0AE487E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDFCB7DA-3A6A-0F2F-7CBB-8196F0AE487E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDFCB7DA-3A6A-0F2F-7CBB-8196F0AE487E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDFCB7DA-3A6A-0F2F-7CBB-8196F0AE487E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

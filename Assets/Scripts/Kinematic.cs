@@ -5,7 +5,7 @@ using UnityEngine;
   agent kinematic properties. Its goal is to provide
   a kinematic implementation outside of Unity constraints
  */
-public class Kinematic {
+public class Kinematic : ILocation {
   /** Position of a kinematic agent, measured with Unity's Vector3 */
   public Vector3 position {
     get { return transform.position; }
