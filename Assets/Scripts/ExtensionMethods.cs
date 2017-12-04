@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using TriangleNet.Geometry;
+using TriangleNet.Meshing;
 using IMesh = TriangleNet.Meshing.IMesh;
 
 using UnityEngine;
@@ -53,6 +54,9 @@ public static class ExtensionMethods {
       polygon.Add(new Contour(points.ToListVertex()), isHole);
     }
 
-    return polygon.Triangulate();
+    var quality = new QualityOptions() { MinimumAngle = 25 };
+
+    // return polygon.Triangulate();
+    return polygon.Triangulate(quality);
   }
 }
