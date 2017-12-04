@@ -246,7 +246,6 @@ public class ShapeEditor : Editor {
 
   private void DrawTriangulation() {
     var mesh =  creator.shapes.makeMesh();
-    var vertices = mesh.Vertices.Select(v => new Vector3((float) v[0], 0, (float) v[1])).ToList();
 
     // For every triangle
     foreach (var triangle in mesh.Triangles) {
