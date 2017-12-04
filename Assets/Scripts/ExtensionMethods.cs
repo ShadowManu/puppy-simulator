@@ -37,6 +37,10 @@ public static class ExtensionMethods {
     return inside; 
   }
 
+  /**
+   * Creates a TriangleNet IMesh from a list of shapes. The first shape is considered the base
+   * and the rest as hole in that base.
+   */
   public static IMesh makeMesh(this List<Shape> shapes) {
     var polygon = new TriangleNet.Geometry.Polygon();
 
