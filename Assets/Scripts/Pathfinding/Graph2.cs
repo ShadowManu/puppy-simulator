@@ -66,4 +66,15 @@ public class Graph2 {
 
     return null;
   }
+
+  /** Finds the node a given position is inside */
+  public Node2 Quantize(Vector3 position) {
+    // For each node
+    foreach (var node in nodes.Values) {
+      // Return the node if it contains the point
+      if (node.ContainsPoint(position)) return node;
+    }
+
+    return null;
+  }
 }
