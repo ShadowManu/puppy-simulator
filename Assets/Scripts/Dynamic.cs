@@ -4,7 +4,7 @@ using UnityEngine;
 public class Dynamic {
 
   /** Generates a steering that dinamically aligns the orientation to face the target */
-  public static Steering Face(Kinematic source, Steering sourceSteering, Kinematic target, AlignOptions opts) {
+  public static Steering Face(Kinematic source, Steering sourceSteering, ILocation target, AlignOptions opts) {
     return Dynamic.Align(source, sourceSteering, Kinematic.Vec2Orient(target.position - source.position), opts);
   }
 
@@ -29,7 +29,7 @@ public class Dynamic {
     return steering;
   }
 
-  public static Steering Arrive(Kinematic source, Steering sourceSteering, Kinematic target, ArriveOptions opts) {
+  public static Steering Arrive(Kinematic source, Steering sourceSteering, Location target, ArriveOptions opts) {
     Steering steering = new Steering();
 
     // Define objectives
