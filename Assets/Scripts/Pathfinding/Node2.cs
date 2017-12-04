@@ -14,7 +14,8 @@ public class Node2 : IComparable<Node2> {
   public Vector3 position;
   public List<int> neighbors;
 
-  public float cost = float.MaxValue;
+  public float pathCost = float.MaxValue;
+  public float heuristicCost = float.MaxValue;
   public List<Node2> path = new List<Node2>();
 
   public Node2(Triangle triangle) {
@@ -28,7 +29,8 @@ public class Node2 : IComparable<Node2> {
   }
 
   public int CompareTo(Node2 other) {
-    return cost.CompareTo(other.cost);
+    if (this == other) return 0;
+    return (pathCost + heuristicCost).CompareTo(other.pathCost + other.heuristicCost);
   }
 
   private Vector3 calcCentroid(Triangle triangle) {

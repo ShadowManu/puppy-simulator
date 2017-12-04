@@ -22,18 +22,23 @@ public class Graph2 {
    * returns null if the destination if not reachable from source.
    */
   public List<Node2> FindPath(Node2 source, Node2 destination) {
-    SortedSet<Node2> open = new SortedSet<Node2>();
+    // Set A* heuristic costs
+    foreach (var node in nodes.Values) {
+      node.heuristicCost = (source.position - destination.position).magnitude;
+    }
+
+    List<Node2> open = new List<Node2>();
     HashSet<Node2> closed = new HashSet<Node2>();
 
     // Initialize source properties and open list
     source.path.Add(source);
-    source.cost = 0;
+    source.pathCost = 0;
     open.Add(source);
 
     // While nodes to process
     while (open.Count > 0) {
       // Pop shortest-path node
-      Node2 current = open.Min;
+      Node2 current = open.Min();
       open.Remove(current);
 
       // End step: the current node is the destination
@@ -44,11 +49,11 @@ public class Graph2 {
       // Process each neighbor
       foreach (var id in current.neighbors) {
         Node2 neighbor = nodes[id];
-        float cost = current.cost + (current.position - neighbor.position).magnitude;
+        float pathCost = current.pathCost + (current.position - neighbor.position).magnitude;
 
         // Update cost and path if shortest
-        if (cost < neighbor.cost) {
-          neighbor.cost = cost;
+        if (pathCost < neighbor.pathCost) {
+          neighbor.pathCost = pathCost;
 
           neighbor.path = new List<Node2>(current.path);
           neighbor.path.Add(neighbor);
