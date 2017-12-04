@@ -248,14 +248,18 @@ public class ShapeEditor : Editor {
     var mesh =  creator.shapes.makeMesh();
     var vertices = mesh.Vertices.Select(v => new Vector3((float) v[0], 0, (float) v[1])).ToList();
 
-    // For every edge
-    foreach (var edge in mesh.Edges) {
-      var src = vertices[edge.P0];
-      var dst = vertices[edge.P1];
+    // For every triangle
+    foreach (var triangle in mesh.Triangles) {
 
-      // Draw line
+      var a = triangle.GetVertex(0).ToVector3();
+      var b = triangle.GetVertex(1).ToVector3();
+      var c = triangle.GetVertex(2).ToVector3();
+
+      // Draw lines
       Handles.color = Color.yellow;
-      Handles.DrawLine(src, dst);
+      Handles.DrawLine(a, b);
+      Handles.DrawLine(b, c);
+      Handles.DrawLine(c, a);
     }
   }
 
