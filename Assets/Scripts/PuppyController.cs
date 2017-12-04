@@ -33,9 +33,8 @@ public class PuppyController : MonoBehaviour {
     var mesh = creator.shapes.makeMesh();
     var graph = new Graph2(mesh);
     
-    var nodeList = graph.nodes.Values;
-    var src = nodeList.First();
-    var dst = nodeList.Last();
+    var src = graph.Quantize(kinematic.position);
+    var dst = graph.Quantize(player.position);
 
     var nodePath = graph.FindPath(src, dst);
     return nodePath.Select(n => new Location(n.position)).ToList();
