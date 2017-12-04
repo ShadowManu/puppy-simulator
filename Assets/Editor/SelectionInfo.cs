@@ -1,7 +1,13 @@
 using UnityEngine;
 
 /** Information about a point */
-public class PointSelection {
+public class SelectionInfo {
+  /** Shape index */
+  public int shapeIndex;
+
+  /** Shape index the mouse is over */
+  public int mouseShapeIndex;
+
   /** Point index */
   public int pointIndex = -1;
 
