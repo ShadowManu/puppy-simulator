@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+using TriangleNet.Geometry;
+using TriangleNet.Meshing;
+using System.Linq;
+
 [CustomEditor(typeof(ShapeCreator))]
 public class ShapeEditor : Editor {
   ShapeCreator creator;
@@ -208,6 +212,8 @@ public class ShapeEditor : Editor {
 
   /** Draw elements in Unity's Editor */
   private void Draw() {
+    DrawTriangulation();
+
     for (int j = 0; j < creator.shapes.Count; j++) {
       var points = creator.shapes[j].points;
       var isSelectedShape = selection.shapeIndex == j;
@@ -235,6 +241,21 @@ public class ShapeEditor : Editor {
         else Handles.color = deselectedColor;
         Handles.DrawSolidDisc(point, Vector3.up, creator.handleRadius);
       }
+    }
+  }
+
+  private void DrawTriangulation() {
+    var mesh =  creator.shapes.makeMesh();
+    var vertices = mesh.Vertices.Select(v => new Vector3((float) v[0], 0, (float) v[1])).ToList();
+
+    // For every edge
+    foreach (var edge in mesh.Edges) {
+      var src = vertices[edge.P0];
+      var dst = vertices[edge.P1];
+
+      // Draw line
+      Handles.color = Color.yellow;
+      Handles.DrawLine(src, dst);
     }
   }
 
