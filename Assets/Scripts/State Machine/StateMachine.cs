@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 /** This class implements a generic Finite State Machine */
 public class StateMachine {
@@ -19,7 +20,8 @@ public class StateMachine {
       // Collect actions from the transition timeline
       var actions = currentState.getExitAction()
       .Concat(triggeredTransition.getAction())
-      .Concat(targetState.getEntryAction());
+      .Concat(targetState.getEntryAction())
+      .ToList();
 
       currentState = targetState;
 
@@ -27,5 +29,12 @@ public class StateMachine {
     }
     // Otherwise, return current action
     else return currentState.getAction();
+  }
+}
+
+public class PuppyMachine : StateMachine {
+
+  public PuppyMachine() {
+    currentState = new PuppyIdleState();
   }
 }

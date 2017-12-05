@@ -29,7 +29,7 @@ public class Dynamic {
     return steering;
   }
 
-  public static Steering Arrive(Kinematic source, Steering sourceSteering, Location target, ArriveOptions opts) {
+  public static Steering Arrive(Kinematic source, Steering sourceSteering, ILocation target, ArriveOptions opts) {
     Steering steering = new Steering();
 
     // Define objectives

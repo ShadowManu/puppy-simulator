@@ -59,4 +59,10 @@ public static class ExtensionMethods {
     // return polygon.Triangulate();
     return polygon.Triangulate(quality);
   }
+
+  public static void AndRun(this List<Action> action) {
+    foreach (var act in action) {
+      act.run();
+    }
+  }
 }
