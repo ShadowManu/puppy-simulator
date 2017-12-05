@@ -1,17 +1,13 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class State {
-  public List<Action> entryActions;
-  public List<Action> actions;
-  public List<Action> exitActions;
-  public List<Transition> transitions;
+public abstract class State {
+  public List<Action> action = new List<Action>();
+  public List<Action> entryAction = new List<Action>();
+  public List<Action> exitAction = new List<Action>();
+  public List<Transition> transitions = new List<Transition>();
 
-  public void setState(List<Action> entry, List<Action> a, List<Action> exit, List<Transition> lt) {
-    entryActions = entry;
-    actions = a;
-    exitActions = exit;
-    transitions = lt;
-  }
+  public List<Action> getAction() { return action; }
+  public List<Action> getEntryAction() { return entryAction; }
+  public List<Action> getExitAction() { return exitAction; }
+  public List<Transition> getTransitions() { return transitions; }
 }

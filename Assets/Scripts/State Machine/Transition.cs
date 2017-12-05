@@ -2,21 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Transition {
+public abstract class Transition {
 
-  public List<Action> actions;
-  public State targetState;
   public Condition condition;
+  public State targetState;
+  public List<Action> action = new List<Action>();
 
-  public void setTransition(List<Action> la, State ts, Condition c) {
-    actions = la;
-    targetState = ts;
-    condition = c;
-  }
-
-  public bool isTriggered() {
-    return condition.Test();
-  }
-  
-
+  public bool isTriggered() { return condition.Test(); }
+  public State getTargetState() { return targetState; }
+  public List<Action> getAction() { return action; }
 }
