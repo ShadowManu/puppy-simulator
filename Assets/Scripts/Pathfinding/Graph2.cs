@@ -22,6 +22,8 @@ public class Graph2 {
    * returns null if the destination if not reachable from source.
    */
   public List<Node2> FindPath(Node2 source, Node2 destination) {
+    if (source == null || destination == null) return new List<Node2>();
+
     // Set A* heuristic costs
     foreach (var node in nodes.Values) {
       node.heuristicCost = (source.position - destination.position).magnitude;

@@ -45,7 +45,7 @@ public class BallController : MonoBehaviour {
     switch (currentState) {
       case BallState.Player:
         // Update position relative to puppy
-        transform.position = GameObject.Find("Player").transform.position + new Vector3(0, 1, 0);
+        transform.position = GameObject.Find("Player").transform.position + new Vector3(0, 0, -1.1f);
 
         if (Input.GetKeyDown(KeyCode.Space)) WorldState.ball = BallState.Air;
         break;
@@ -60,8 +60,11 @@ public class BallController : MonoBehaviour {
         break;
       
       case BallState.Puppy:
-        // Update position relative to puppy
-        transform.position = GameObject.Find("Puppy").transform.position + new Vector3(0, 1, 0);
+        var go = GameObject.Find("Puppy");
+        var controller = go.GetComponent<PuppyController>();
+        var offset = Kinematic.Orient2Vec(controller.kinematic.orientation) * 1.5f + new Vector3(0, 1f, 0);
+
+        transform.position = go.transform.position + offset;
         break;
     }
   }

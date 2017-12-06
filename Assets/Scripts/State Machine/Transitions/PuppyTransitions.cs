@@ -30,7 +30,7 @@ public class PuppyFollowPlayerToIdleTransition : Transition {
     var puppy = GameObject.Find("Puppy").transform;
     var player = GameObject.Find("Player").transform;
 
-    condition = new ClosenessCondition(puppy, player, 1f);
+    condition = new ClosenessCondition(puppy, player, 3f);
   }
 
   public override State getTargetState() {
@@ -55,7 +55,7 @@ public class PuppyIdleToFollowPlayerTransition : Transition {
     var puppy = GameObject.Find("Puppy").transform;
     var player = GameObject.Find("Player").transform;
 
-    condition = new NotCondition(new ClosenessCondition(puppy, player, 6f));
+    condition = new NotCondition(new ClosenessCondition(puppy, player, 15f));
   }
 
   public override State getTargetState() {
@@ -69,7 +69,7 @@ public class PuppyReturnBallToIdleTransition : Transition {
     var puppy = GameObject.Find("Puppy").transform;
     var player = GameObject.Find("Player").transform;
 
-    condition = new ClosenessCondition(puppy, player, 1f);
+    condition = new ClosenessCondition(puppy, player, 3f);
   }
 
   public override State getTargetState() {

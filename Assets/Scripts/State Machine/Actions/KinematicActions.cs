@@ -33,7 +33,7 @@ public class IdleAction : Action {
 
 public class ChaseAction : Action {
   Kinematic kinematic;
-  ILocation location;
+  Transform transform;
 
   Steering steering = new Steering();
   ArriveOptions arriveOptions = new ArriveOptions();
@@ -41,9 +41,9 @@ public class ChaseAction : Action {
 
   IMesh mesh;
 
-  public ChaseAction(Kinematic kinematic, ILocation location) {
+  public ChaseAction(Kinematic kinematic, Transform transform) {
     this.kinematic = kinematic;
-    this.location = location;
+    this.transform = transform;
 
     mesh = GameObject.Find("Map").GetComponent<ShapeCreator>().shapes.makeMesh();
   }
@@ -51,7 +51,7 @@ public class ChaseAction : Action {
   public void run() {
     var graph = new Graph2(mesh);
     var source = graph.Quantize(kinematic.position);
-    var dest = graph.Quantize(location.position);
+    var dest = graph.Quantize(transform.position);
 
     var path = graph.FindPath(source, dest).Select(n => n.position).ToList();
 
@@ -59,7 +59,7 @@ public class ChaseAction : Action {
 
     // Path is short, go straight
     if (path.Count <= 2) {
-      target = location;
+      target = new Location(transform.position);
     
     // Go to first segment of path
     } else {
@@ -67,7 +67,7 @@ public class ChaseAction : Action {
     }
 
     var arrive = Dynamic.Arrive(kinematic, steering, target, arriveOptions);
-    var face = Dynamic.Face(kinematic, steering, target, alignOptions);
+    var face = Dynamic.Face(kinematic, steering, new Location(transform.position), alignOptions);
 
     steering = arrive.Combine(face);
 

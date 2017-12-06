@@ -14,9 +14,9 @@ public class PuppyFollowBallState : State {
 
   public PuppyFollowBallState() {
     var kinematic = GameObject.Find("Puppy").GetComponent<PuppyController>().kinematic;
-    var location = new Location(GameObject.Find("Ball").transform.position);
+    var transform = GameObject.Find("Ball").transform;
 
-    action.Add(new ChaseAction(kinematic, location));
+    action.Add(new ChaseAction(kinematic, transform));
 
     exitAction.Add(new ChangeBallAction(BallState.Puppy));
 
@@ -27,10 +27,10 @@ public class PuppyFollowBallState : State {
 public class PuppyFollowPlayerState : State {
 
   public PuppyFollowPlayerState() {
-    var puppy = GameObject.Find("Puppy").GetComponent<PuppyController>().kinematic;
-    var player = GameObject.Find("Player").GetComponent<PlayerController>().kinematic;
+    var kinematic = GameObject.Find("Puppy").GetComponent<PuppyController>().kinematic;
+    var transform = GameObject.Find("Player").GetComponent<PlayerController>().transform;
 
-    action.Add(new ArriveAction(puppy, new Steering(), player));
+    action.Add(new ChaseAction(kinematic, transform));
 
     transitions.Add(new PuppyFollowPlayerToFollowBallTransition());
     transitions.Add(new PuppyFollowPlayerToIdleTransition());
@@ -42,9 +42,9 @@ public class PuppyReturnBallState : State {
 
   public PuppyReturnBallState() {
     var kinematic = GameObject.Find("Puppy").GetComponent<PuppyController>().kinematic;
-    var location = new Location(GameObject.Find("Player").transform.position);
+    var transform = GameObject.Find("Player").transform;
 
-    action.Add(new ChaseAction(kinematic, location));
+    action.Add(new ChaseAction(kinematic, transform));
 
     exitAction.Add(new ChangeBallAction(BallState.Player));
 

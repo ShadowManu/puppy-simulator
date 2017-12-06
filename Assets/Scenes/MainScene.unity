@@ -648,7 +648,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &160052065
 Transform:
   m_ObjectHideFlags: 0
@@ -1229,7 +1229,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  gravity: {x: 0, y: -9.8, z: 0}
 --- !u!4 &259428339 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 27977a70a20b90a408f2caee7432861c, type: 3}
@@ -5384,14 +5383,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1079883042}
-  m_LocalRotation: {x: -0.0054521603, y: -0.008188656, z: -0.0074460753, w: 0.9999239}
+  m_LocalRotation: {x: -0.0074000773, y: 0.99995744, z: 0.005514998, w: 0.000040813156}
   m_LocalPosition: {x: -5, y: 1.25, z: 0.57}
   m_LocalScale: {x: 0.61385596, y: 2.5, z: 1.8366011}
   m_Children:
   - {fileID: 1357459086}
   m_Father: {fileID: 0}
   m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: -0.632, y: -0.934, z: -0.84800005}
+  m_LocalEulerAnglesHint: {x: -0.632, y: 180, z: -0.84800005}
 --- !u!114 &1079883047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7158,7 +7157,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1451519082
 Transform:
   m_ObjectHideFlags: 0
@@ -8822,6 +8821,7 @@ GameObject:
   - component: {fileID: 1836127584}
   - component: {fileID: 1836127583}
   - component: {fileID: 1836127582}
+  - component: {fileID: 1836127587}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -8892,13 +8892,25 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1836127581}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -2.2, y: 95.2, z: -0.9}
+  m_LocalRotation: {x: 0.42040247, y: 0, z: 0, w: 0.9073377}
+  m_LocalPosition: {x: -4.82, y: 27.2, z: -19.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 49.72, y: 0, z: 0}
+--- !u!114 &1836127587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1836127581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f950d70c71b95843892da8bba212988, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
 --- !u!1001 &1876668732
 Prefab:
   m_ObjectHideFlags: 0
