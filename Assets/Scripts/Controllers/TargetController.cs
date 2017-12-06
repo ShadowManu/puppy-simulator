@@ -7,6 +7,8 @@ public class TargetController : MonoBehaviour {
   bool showAndMove;
   new bool enabled;
 
+  public static float floorHeight = 0.1f;
+
   void Start() {
     renderer = GetComponent<Renderer>();
     player = GameObject.Find("Player").GetComponent<PlayerController>().kinematic;
@@ -25,8 +27,6 @@ public class TargetController : MonoBehaviour {
   void MoveTarget() {
     float h = Input.GetAxis("Mouse X");
     float v = Input.GetAxis("Mouse Y");
-    Debug.Log(h);
-    Debug.Log(v);
 
     transform.position += new Vector3(h, 0, v);
   }
@@ -39,7 +39,7 @@ public class TargetController : MonoBehaviour {
   void EnableState() {
     enabled = true;
     renderer.enabled = true;
-    transform.position = new Vector3(0, .05f, 0) + Vector3.ProjectOnPlane(player.position, Vector3.up) + Kinematic.Orient2Vec(player.orientation) * 5;
+    transform.position = new Vector3(0, TargetController.floorHeight, 0) + Vector3.ProjectOnPlane(player.position, Vector3.up) + Kinematic.Orient2Vec(player.orientation) * 5;
   }
 
   void DisableState() {
