@@ -6,11 +6,12 @@ using UnityEngine;
 public class PuppyController : MonoBehaviour {
   public Kinematic kinematic;
   public Steering steering { get; set; }
-  public StateMachine stateMachine = new PuppyMachine();
+  public StateMachine stateMachine;
 
   void Start() {
     kinematic = new Kinematic(transform);
     steering = new Steering();
+    stateMachine = new PuppyMachine();
   }
 
   // private List<Location> makePathFromMap() {
