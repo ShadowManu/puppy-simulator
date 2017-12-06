@@ -18,7 +18,7 @@ public class BallController : MonoBehaviour {
   void Update () {
 
     if (Input.GetKeyDown(KeyCode.Space)) {
-      velocity = Throwing.CalculateThrowing(transform.position, targetPosition.transform.position, 15, gravity);
+      velocity = Throwing.Velocity(transform.position, targetPosition.transform.position, 15, gravity);
     }
     
     updatePosition();
