@@ -3,9 +3,13 @@ using System.Collections;
 
 public class Throwing { 
   
+  /**
+   * Calculates a velocity vector required to throw a projectile from 
+   * a start location to finish on an end location, given a desired velocity and gravity
+   */
   public static Vector3 Velocity(Vector3 start, Vector3 end, float velocity, Vector3 gravity) {
     // Vector from target back to the start
-    Vector3 delta = start - end;
+    Vector3 delta = end - start;
 
     // Calculate coeficients of conventional quadratic equation
     var a = Vector3.Dot(gravity, gravity);
@@ -25,10 +29,10 @@ public class Throwing {
     // Choose better time
     float time = 0;
     if (time0 > 0 && time1 > 0) time = Mathf.Min(time0, time1);
-    if (time0 > 0 && time0 < time1) time = time0;
-    if (time1 > 0 && time1 < time0) time = time1;
+    else if (time0 > 0 && time0 < time1) time = time0;
+    else if (time1 > 0 && time1 < time0) time = time1;
 
     // Return the firing vector
-    return (2*delta - gravity * (time*time)) / (2*velocity*time);
+    return (2*delta - gravity * (time*time)) / (2*time);
   }
 }
