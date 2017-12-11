@@ -38,3 +38,31 @@ public class PuppyMachine : StateMachine {
     currentState = new PuppyIdleState();
   }
 }
+
+public class Cat1Machine : StateMachine {
+
+  public Cat1Machine() {
+    currentState = new Cat1IdleState();
+  }
+}
+
+public class Cat2Machine : StateMachine {
+
+  public Cat2Machine() {
+    currentState = new Cat2IdleState();
+  }
+}
+
+public class Cat3Machine : StateMachine {
+
+  public Cat3Machine() {
+    currentState = new Cat3IdleState();
+  }
+}
+
+public class Cat4Machine : StateMachine {
+
+  public Cat4Machine() {
+    currentState = new Cat4IdleState();
+  }
+}
